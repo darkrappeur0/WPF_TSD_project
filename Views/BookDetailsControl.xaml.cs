@@ -1,6 +1,7 @@
 using HomeLibrary;
 using System.Windows;
 using System.Windows.Controls;
+using System;
 
 namespace WPF_TSD_project.Views
 {
@@ -20,13 +21,13 @@ namespace WPF_TSD_project.Views
             this.DataContext = currentBook;
         }
 
-        public event RoutedEventHandler<Book> DeleteRequested;
+        public event EventHandler<Book> DeleteRequested;
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (currentBook != null)
             {
-                var result = MessageBox.Show($"Are you sure you want to delete "{currentBook.Title}"?", "Confirm Deletion", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Are you sure you want to delete \"{currentBook.Title}\"?", "Confirm Deletion", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     DeleteRequested?.Invoke(this, currentBook);
